@@ -1,0 +1,27 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0.5%;
+}
+
+#map {
+    height: 100%;
+}
+
+#mapOptions {
+    float: left;
+    min-width: 125px;
+    width: 10%;
+}
+
+ul {
+    margin-left: 0%;
+    padding-left: 5%;
+}
+
+li {
+    cursor: pointer;
+}

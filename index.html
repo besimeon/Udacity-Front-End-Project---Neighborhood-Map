@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/responsive.css">
+    <title>Front-End Project - Neighborhood Map</title>
+</head>
+<body>
+	<section id="mapOptions">
+		<!-- use placeholder for default value, bind to markerGroups, use the change event to call showMarkers -->
+		<select data-bind= "options: markerGroups,
+							optionsText: 'name',
+							value: currGroup,
+							optionsCaption: 'Select a group',
+							event: {change: showMarkers}">
+		</select>
+		<!-- populate div with current group of markers -->
+		<div data-bind="with: currGroup(), visible: currGroup">
+			<!-- populate list with marker titles -->
+			<ul id="markerList" data-bind="foreach: markerList">
+				<li data-bind="click: $parent.setCurrentMarker, text: title"></li>
+			</ul> 
+			<div data-bind="with: currentMarker(), visible: currentMarker">
+				<h3 data-bind="text: photosHeading"></h3>
+				<p data-bind="text: photosError, visible: photosError"></p>
+				<!-- 
+					using "ko foreach" to create an image element for each photo in
+					fsqPhotos observableArray, with the src attribute bound to photoSrc: 
+				-->
+				<!-- ko foreach: fsqPhotos -->
+					<img data-bind="attr: { src: photoSrc }">
+				<!-- /ko -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="map"></section>
+	<script type="text/javascript">
+		var currMapInfoWindow;
+		var map;
+		var defaultMarkers = [];
+		var defaultInfoWindow;
+
+		// using same funciton name as Google Maps Lesson code.
+		function initMap(){
+			// constructor for new map:
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: {lat: 30.0266402, lng: -90.2488377777},
+				zoom: 14.34
+			});
+			defaultInfoWindow = new google.maps.InfoWindow()
+
+			// show all markers at map load:
+			showDefaultMarkers();
+
+			fitMapToMarkers();
+
+		}
+
+		// zoom map to encompass all markers:
+		function fitMapToMarkers(){
+			var bounds = new google.maps.LatLngBounds();
+			for (var i = 0; i<defaultMarkers.length; i++){
+				bounds.extend(defaultMarkers[i].getPosition());
+			}
+			map.fitBounds(bounds);
+		}
+
+		// show all markers from JSON data at map load:
+		function showDefaultMarkers(){
+			for(var i = 0; i<markerData.length; i++){
+				for(var j=0; j<markerData[i].markers.length; j++){
+					var marker = new google.maps.Marker({
+						animation: google.maps.Animation.DROP,
+						position: markerData[i].markers[j].latLng,
+						map: map,
+						title: markerData[i].markers[j].title
+					});
+					marker.addListener('click', function(){
+						showInfoWindow(this);
+						toggleBounce(this);
+					});
+					defaultMarkers.push(marker);
+				}
+			}
+		}
+		// toggle bounce animation:
+		function toggleBounce(marker){
+			if(marker.getAnimation() !== null){
+				marker.setAnimation(null)
+			}
+				else{
+					marker.setAnimation(google.maps.Animation.BOUNCE);
+				}
+		}
+		// clear markers: 
+		function clearDefaultMarkers(){
+			for(var i = 0; i<defaultMarkers.length; i++){
+				defaultMarkers[i].setMap(null);
+			}
+			defaultMarkers.length = 0;
+		}
+		// display and configure info window:
+		function showInfoWindow(marker){
+			if(defaultInfoWindow.marker != marker){
+				defaultInfoWindow.marker = marker;
+				defaultInfoWindow.setContent('<div>' +marker.title+ '</div>');
+				defaultInfoWindow.open(map, marker);
+				defaultInfoWindow.addListener('click', function(){
+					defaultInfoWindow.close();
+				});
+			}
+		}
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/lib/knockout-3.2.0.js"></script>
+	<!-- storing my marker data in JSON format found in the following file: -->
+	<script type="text/javascript" src="js/markerData.JSON"></script>
+	<script type="text/javascript" src="js/mvvm.js"></script>
+	<!-- async call to google maps api, functional as of August 2018, passing my api key: -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7llF6pm7sAHXMCSWJnDGRcJhFSxL8MAs&v=3&callback=initMap"></script>
+</body>
+</html>

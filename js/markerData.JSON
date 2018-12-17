@@ -1,0 +1,47 @@
+var markerData = [
+	{	
+		"name": "Health Markers",
+		"markers": [
+			{
+				"fsqID": "4bba13c93db7b713afdb229a",
+				"latLng": { "lat": 30.033849, "lng": -90.267620 },
+				"title": "The Park"
+			},
+			{
+				"fsqID": "5580274e498e439bd07d4a68",
+				"latLng": { "lat": 30.018247, "lng": -90.232408 },
+				"title": "The Zoo Gym"
+			}
+		]
+	},
+	{
+		"name": "Daily Markers",
+		"markers": [
+			{
+				"fsqID": "4ae33a27f964a520f69121e3",
+				"latLng": { "lat": 30.020643, "lng": -90.237663 },
+				"title": "The grocery near the gym"
+			},
+			{
+				"fsqID": "4fd1388ce4b0d6a2d49c0318",
+				"latLng": { "lat": 30.020081, "lng": -90.251931 },
+				"title": "Home"
+			}
+		]
+	},
+	{
+		"name": "Fun Markers",
+		"markers": [
+			{
+				"fsqID": "4cba12b990c9a143b8188cd6",
+				"latLng": { "lat": 30.023700, "lng": -90.256080 },
+				"title": "Chateau Pub"
+			},
+			{
+				"fsqID": "4b259b0af964a520707424e3",
+				"latLng": { "lat": 30.020794, "lng": -90.258001 },
+				"title": "Reginellis"
+			}
+		],
+	}
+]
