@@ -1,0 +1,41 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 1%;
+    font-family: sans-serif, Tahoma, Geneva;
+}
+
+#map {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 50%;
+    margin: 5%;
+}
+
+#mapOptions {
+    align-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 45%;
+    overflow: scroll;
+    margin: 5%;
+    padding: 3% 2% 1% 2%;
+}
+
+#markerSelector {
+    width: 75%;
+}
+
+ul {
+    margin-left: 0%;
+    padding-left: 5%;
+}
+
+li {
+    cursor: pointer;
+}
+
+img{
+    width: 45%;
+}

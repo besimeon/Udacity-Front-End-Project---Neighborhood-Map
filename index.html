@@ -3,13 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" media="screen and (min-width: 901px)" href="css/responsive.css">
     <title>Front-End Project - Neighborhood Map</title>
 </head>
 <body>
 	<section id="mapOptions">
 		<!-- use placeholder for default value, bind to markerGroups, use the change event to call showMarkers -->
-		<select data-bind= "options: markerGroups,
+		<select id="markerSelector" data-bind= "options: markerGroups,
 							optionsText: 'name',
 							value: currGroup,
 							optionsCaption: 'Select a group',
@@ -21,7 +23,7 @@
 			<ul id="markerList" data-bind="foreach: markerList">
 				<li data-bind="click: $parent.setCurrentMarker, text: title"></li>
 			</ul> 
-			<div data-bind="with: currentMarker(), visible: currentMarker">
+			<div id="photosContainer" data-bind="with: currentMarker(), visible: currentMarker">
 				<h3 data-bind="text: photosHeading"></h3>
 				<p data-bind="text: photosError, visible: photosError"></p>
 				<!-- 
